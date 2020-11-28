@@ -1,15 +1,23 @@
 // main file
-
+import './assets/bootstrap.min.css';
 import MainController from "./mainpage/mainController";
 
 window.onhashchange = () => {
     const hash = window.location.hash.slice(1);
-    if (hash === '') {
-        new MainController().showPage();
+
+    switch (hash) {
+        case '':
+            new MainController().showPage();
+            break;
+        case 'catalog':
+
+            break;
+
     }
 };
 
 window.location.hash = '';
+console.log('assh');
 
 function mainPage() {
 
