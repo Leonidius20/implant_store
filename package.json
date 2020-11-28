@@ -1,0 +1,19 @@
+{
+  "name": "implant_store",
+  "version": "1.0.0",
+  "description": "An online store for biological implants (made for practice)",
+  "main": "index.js",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "deploy": "gh-pages -d dist"
+  },
+  "author": "Leonidius20",
+  "license": "MIT"
+}
