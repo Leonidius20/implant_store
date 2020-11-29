@@ -6,3 +6,10 @@ footer {
     margin-top: 2em;
     margin-bottom: 2em;
 }
+
+#toast-container {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+}

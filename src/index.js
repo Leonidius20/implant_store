@@ -5,11 +5,15 @@ import MainController from "./mainpage/mainController";
 import CatalogController from "./catalog/catalogController";
 import {showLoader} from "./loader/loader";
 import PromoController from "./promopage/promoController";
-import ProductController from "./productpage/productController";
+import productController from "./productpage/productController";
 
 export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
 
-window.onload = navigate;
+window.onload = () => {
+    navigate();
+    document.getElementById('cart-number-of-items').innerText
+        = Object.keys(JSON.parse(window.localStorage.getItem('cart')) || {}).length.toString();
+}
 window.onhashchange = navigate;
 
 function navigate() {
@@ -47,7 +51,7 @@ function navigate() {
             if (pathAndId[1] == null) { // no id specified
                 window.location.hash = '';
             } else {
-                new ProductController().showPage(pathAndId[1]);
+                productController(parseInt(pathAndId[1]));
             }
             break;
         default:
