@@ -7,6 +7,8 @@ import {showLoader} from "./loader/loader";
 import PromoController from "./promopage/promoController";
 import productController from "./productpage/productController";
 import categoryController from "./categorypage/categoryController";
+import cartController from "./cartpage/cartController";
+import makeOrderController from "./makeorder/makeOrderController";
 
 export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
 
@@ -40,7 +42,6 @@ function navigate() {
                 new CatalogController().showPage();
                 document.getElementById('nav-item-catalog').classList.add('active');
             } else {
-                console.log("Assss");
                 categoryController(parseInt(pathAndId[1]));
             }
             break;
@@ -59,6 +60,14 @@ function navigate() {
             } else {
                 productController(parseInt(pathAndId[1]));
             }
+            break;
+        case 'cart':
+            showLoader();
+            cartController();
+            break;
+        case 'order':
+            showLoader();
+            makeOrderController();
             break;
         default:
             window.location.hash = '';
