@@ -1,7 +1,7 @@
 import {API_URL} from "../index";
 
 export default async function getProducts(categoryId) {
-    const productsPromise = fetch(API_URL + 'products')
+    return fetch(API_URL + 'products')
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText);

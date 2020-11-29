@@ -6,7 +6,7 @@ import populateTemplate from "../templater";
 export default function render({ categoryName, products }) {
     let cards = '';
 
-    for (const product in products) {
+    for (const product of products) {
         cards += populateTemplate(cardTemplate, product);
     }
 
