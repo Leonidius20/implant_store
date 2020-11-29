@@ -6,6 +6,7 @@ import CatalogController from "./catalog/catalogController";
 import {showLoader} from "./loader/loader";
 import PromoController from "./promopage/promoController";
 import productController from "./productpage/productController";
+import categoryController from "./categorypage/categoryController";
 
 export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
 
@@ -35,8 +36,13 @@ function navigate() {
             break;
         case 'catalog':
             showLoader();
-            new CatalogController().showPage();
-            document.getElementById('nav-item-catalog').classList.add('active');
+            if (pathAndId[1] == null) {
+                new CatalogController().showPage();
+                document.getElementById('nav-item-catalog').classList.add('active');
+            } else {
+                console.log("Assss");
+                categoryController(parseInt(pathAndId[1]));
+            }
             break;
         case 'promo':
             showLoader();

@@ -7,13 +7,14 @@ import populateTemplate from "../templater"
 export default function render(params) {
     let categories = '';
 
-    for (const categoryName in params) {
+    for (const category of params) {
         let products = '';
-        for (const product of params[categoryName]) {
+        for (const product of category['products']) {
             products += populateTemplate(cardTemplate, product);
         }
         categories += populateTemplate(categoryTemplate, {
-            name: categoryName,
+            name: category['name'],
+            id: category['id'],
             products
         });
     }
