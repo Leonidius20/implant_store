@@ -15,4 +15,11 @@ export function addToCart(productId, amount) {
     const cartSize = putToCart(productId, amount);
     document.getElementById('cart-number-of-items').innerText
         = cartSize.toString();
+
+    const addedText = document.createElement('p');
+    addedText.innerText = 'This item is in the cart.';
+    addedText.classList.add('text-muted');
+
+    document.getElementById('addToCartBlock').parentElement.replaceChild(
+        addedText, document.getElementById('addToCartBlock'));
 }

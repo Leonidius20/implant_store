@@ -20,12 +20,13 @@ export default async function getProduct(id) {
 
 export function putToCart(productId, amount) {
     const cart = JSON.parse(window.localStorage.getItem('cart')) || {};
-    if (cart[productId] == null) {
-        cart[productId] = amount;
-        window.localStorage.setItem('cart', JSON.stringify(cart));
-    } else {
-        showToast('This item is already in cart. <a href=\"#cart\">Go to cart</a> if you want to change its quantity');
-    }
+    cart[productId] = amount;
+    window.localStorage.setItem('cart', JSON.stringify(cart));
 
     return Object.keys(cart).length;
+}
+
+export function isInCart(productId) {
+    const cart = JSON.parse(window.localStorage.getItem('cart')) || {};
+    return cart[productId] != null;
 }

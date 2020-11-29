@@ -1,12 +1,23 @@
-import template from './productPageTemplate.html'
+import pageTemplate from './templates/productPageTemplate.html'
+import addToCartTemplate from './templates/addToCartTemplate.html'
 import {inputSpinner} from 'bootstrap-input-spinner'
-import './productPageStyle.css'
+import './templates/productPageStyle.css'
 import populateTemplate from "../templater"
 import {addToCart} from "./productController";
+import {isInCart} from "./productModel";
 
 export default function render(params) {
+    let addToCart;
+    if (isInCart(params['id'])) {
+        addToCart = '<p class="text-muted">This item is in the cart.</p>'
+    } else {
+        addToCart = populateTemplate(addToCartTemplate, params);
+    }
+
     document.getElementById('container').innerHTML =
-        populateTemplate(template, params);
+        populateTemplate(pageTemplate, Object.assign({
+            add_to_cart: addToCart
+        }, params));
     globalThis.onAddToCartClicked = onAddToCartClicked;
     $('#amount').inputSpinner({
         groupClass: "amount-selector",
@@ -17,4 +28,5 @@ export default function render(params) {
 function onAddToCartClicked(productId) {
     const amount = parseInt($('#amount').val());
     addToCart(productId, amount);
+
 }
