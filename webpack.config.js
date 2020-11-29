@@ -17,7 +17,11 @@ const config = {
                     'style-loader',
                     'css-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     entry: './src/index.js',
@@ -30,7 +34,7 @@ const config = {
     devServer: {
         //contentBase: path.resolve(__dirname, 'dist/'),
         //publicPath: path.resolve(__dirname, 'dist/'),
-        hot: true,
+        // hot: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
