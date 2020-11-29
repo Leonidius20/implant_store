@@ -1,8 +1,11 @@
 // main file
 import './assets/bootstrap.min.css';
+import './assets/footer.css';
 import MainController from "./mainpage/mainController";
 import CatalogController from "./catalog/catalogController";
 import {showLoader} from "./loader/loader";
+import PromoController from "./promopage/promoController";
+import ProductController from "./productpage/productController";
 
 export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
 
@@ -17,15 +20,38 @@ function navigate() {
         navbarItems.item(i).classList.remove('active');
     }
 
-    switch (hash) {
+    const pathAndId = hash.split('/');
+    const path = pathAndId[0];
+
+    switch (path) {
         case '':
             showLoader();
             new MainController().showPage();
             document.getElementById('nav-item-home').classList.add('active');
             break;
         case 'catalog':
+            showLoader();
             new CatalogController().showPage();
             document.getElementById('nav-item-catalog').classList.add('active');
+            break;
+        case 'promo':
+            showLoader();
+            if (pathAndId[1] == null) { // no id specified
+                window.location.hash = '';
+            } else {
+                new PromoController().showPage(pathAndId[1]);
+            }
+            break;
+        case 'product':
+            showLoader();
+            if (pathAndId[1] == null) { // no id specified
+                window.location.hash = '';
+            } else {
+                new ProductController().showPage(pathAndId[1]);
+            }
+            break;
+        default:
+            window.location.hash = '';
             break;
 
     }
