@@ -11,7 +11,7 @@ export default function showPage() {
         }).finally(hideLoader);
 }
 
-async function loadAndRender() {
+export async function loadAndRender() {
     let total = 0;
     const products = [];
     const itemsInCart = getItemsInCart();

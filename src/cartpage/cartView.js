@@ -3,6 +3,8 @@ import cartItemTemplate from './templates/cartItemTemplate.html';
 import cartPageTemplate from './templates/cartPageTemplate.html';
 import cartContentTemplate from './templates/cartContentTemplate.html';
 import {removeFromCart} from "./cartModel";
+import ErrorController from "../errorpage/errorController";
+import {loadAndRender} from "./cartController";
 
 export default function render({total, products}) {
     if (products.length === 0) {
@@ -26,8 +28,15 @@ export default function render({total, products}) {
     }
 }
 
-function onRemoveItemFromCartClicked(productId) {
+function onRemoveItemFromCartClicked(element, productId) {
     const cartSize = removeFromCart(productId);
     document.getElementById('cart-number-of-items').innerText
         = cartSize.toString();
+
+    element.parentElement.parentElement.remove();
+
+    loadAndRender()
+        .catch(error => {
+            new ErrorController().showPage(error);
+        });
 }
