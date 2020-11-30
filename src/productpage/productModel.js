@@ -1,5 +1,4 @@
 import {API_URL} from "../index";
-import showToast from "../toast/toast";
 
 export default async function getProduct(id) {
     return fetch(API_URL + 'products')

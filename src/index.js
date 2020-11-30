@@ -12,12 +12,16 @@ import makeOrderController from "./makeorder/makeOrderController";
 
 export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
 
+let ignoreHashChange = false;
+
 window.onload = () => {
     navigate();
     document.getElementById('cart-number-of-items').innerText
         = Object.keys(JSON.parse(window.localStorage.getItem('cart')) || {}).length.toString();
 }
-window.onhashchange = navigate;
+window.onhashchange = () => {
+    if (!ignoreHashChange) navigate();
+};
 
 function navigate() {
     const hash = window.location.hash.slice(1);
@@ -66,8 +70,10 @@ function navigate() {
             cartController();
             break;
         case 'order':
-            showLoader();
-            makeOrderController();
+            if (pathAndId[1] == null) {
+                showLoader();
+                makeOrderController();
+            } else window.location.hash = 'catalog';
             break;
         default:
             window.location.hash = '';
@@ -76,34 +82,6 @@ function navigate() {
     }
 }
 
-function mainPage() {
-
-}
-
-function catalog() {
-
-}
-
-function category(id) {
-
-}
-
-function product(id) {
-
-}
-
-function promo(id) {
-
-}
-
-function cart() {
-
-}
-
-function makeOrder() {
-
-}
-
-function viewOrder(id) {
-
+export function setIgnoreHashChange(value) {
+    ignoreHashChange = value;
 }

@@ -2,7 +2,11 @@
     <h1>Checkout</h1>
     ${cartItems}
     <h3>Total: ${total}$</h3>
-    <form id="form" class="needs-validation" onsubmit="globalThis.onOrderFormSubmit(event)" novalidate>
+    <form id="form"
+          class="needs-validation"
+          onsubmit="event.preventDefault(); globalThis.onOrderFormSubmit(event)"
+          method="post" action="${api}orders"
+          novalidate>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputName4">Name</label>
@@ -55,15 +59,15 @@
                 <input type="text" class="form-control" id="inputCity" required>
             </div>
             <div class="form-group col-md-4">
-                <label for="inputState">Payment method</label>
-                <select id="inputState" class="form-control">
+                <label for="inputPaymentOption">Payment method</label>
+                <select id="inputPaymentOption" class="form-control">
                     <option selected>Credit card</option>
                     <option>Cash</option>
                 </select>
             </div>
             <div class="form-group col-md-2">
-                <label for="inputZip">Delivery date</label>
-                <input type="date" class="form-control" id="inputZip" required>
+                <label for="inputDate">Delivery date</label>
+                <input type="date" class="form-control" id="inputDate" required>
                 <div class="invalid-feedback">
                     This field is required
                 </div>
