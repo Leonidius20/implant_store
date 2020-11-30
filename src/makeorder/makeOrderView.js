@@ -19,7 +19,7 @@ export default function render({ total, products }) {
 function onOrderFormSubmit(event) {
     const form = document.getElementById('form');
 
-    if (checkForm(form) === false) {
+    if (!form.checkValidity()) {
         event.preventDefault();
         event.stopPropagation();
         form.classList.add('was-validated');
@@ -43,12 +43,4 @@ function onOrderFormSubmit(event) {
     });
 
     return true;
-}
-
-function checkForm(form) {
-    const phoneInput = document.getElementById('inputPhone4');
-    if (!/^\+[0-9]{12}$/.test(phoneInput.value)) {
-        phoneInput.setCustomValidity('invalid');
-    } else phoneInput.setCustomValidity('');
-    return form.checkValidity();
 }

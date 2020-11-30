@@ -30,3 +30,18 @@ function onAddToCartClicked(productId) {
     addToCart(productId, amount);
 
 }
+
+// could move to navbar view
+export function updateCartSize(newSize) {
+    document.getElementById('cart-number-of-items').innerText
+        = newSize.toString();
+}
+
+export function hideAmountSelector() {
+    const addedText = document.createElement('p');
+    addedText.innerText = 'This item is in the cart.';
+    addedText.classList.add('text-muted');
+
+    document.getElementById('addToCartBlock').parentElement.replaceChild(
+        addedText, document.getElementById('addToCartBlock'));
+}

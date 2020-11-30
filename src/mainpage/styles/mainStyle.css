@@ -5,5 +5,5 @@
 .carousel-promo-title, .carousel-promo-text {
     background-color: black;
     width: fit-content;
-    font-size: 2em;
+    margin-bottom: 1vw;
 }

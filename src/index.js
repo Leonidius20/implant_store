@@ -1,4 +1,3 @@
-// main file
 import './assets/bootstrap.min.css';
 import './assets/footer.css';
 import MainController from "./mainpage/mainController";
@@ -17,7 +16,7 @@ let ignoreHashChange = false;
 window.onload = () => {
     navigate();
     document.getElementById('cart-number-of-items').innerText
-        = Object.keys(JSON.parse(window.localStorage.getItem('cart')) || {}).length.toString();
+        = getCartSize().toString();
 }
 window.onhashchange = () => {
     if (!ignoreHashChange) navigate();
@@ -26,10 +25,7 @@ window.onhashchange = () => {
 function navigate() {
     const hash = window.location.hash.slice(1);
 
-    const navbarItems = document.getElementsByClassName('nav-item');
-    for (let i = 0; i < navbarItems.length; i++) {
-        navbarItems.item(i).classList.remove('active');
-    }
+    deselectAllNavbarItems();
 
     const pathAndId = hash.split('/');
     const path = pathAndId[0];
@@ -38,13 +34,13 @@ function navigate() {
         case '':
             showLoader();
             new MainController().showPage();
-            document.getElementById('nav-item-home').classList.add('active');
+            selectNavbarItem('nav-item-home');
             break;
         case 'catalog':
             showLoader();
             if (pathAndId[1] == null) {
                 new CatalogController().showPage();
-                document.getElementById('nav-item-catalog').classList.add('active');
+                selectNavbarItem('nav-item-catalog');
             } else {
                 categoryController(parseInt(pathAndId[1]));
             }
@@ -71,8 +67,12 @@ function navigate() {
             break;
         case 'order':
             if (pathAndId[1] == null) {
-                showLoader();
-                makeOrderController();
+                if (getCartSize() === 0) {
+                    window.location.hash = 'catalog';
+                } else {
+                    showLoader();
+                    makeOrderController();
+                }
             } else window.location.hash = 'catalog';
             break;
         default:
@@ -84,4 +84,19 @@ function navigate() {
 
 export function setIgnoreHashChange(value) {
     ignoreHashChange = value;
+}
+
+function getCartSize() {
+    return Object.keys(JSON.parse(window.localStorage.getItem('cart')) || {}).length;
+}
+
+function deselectAllNavbarItems() {
+    const navbarItems = document.getElementsByClassName('nav-item');
+    for (let i = 0; i < navbarItems.length; i++) {
+        navbarItems.item(i).classList.remove('active');
+    }
+}
+
+function selectNavbarItem(elementId) {
+    document.getElementById(elementId).classList.add('active');
 }
