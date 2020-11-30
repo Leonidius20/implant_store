@@ -78,8 +78,8 @@ function navigate() {
         default:
             window.location.hash = '';
             break;
-
     }
+    scroll(0, 0);
 }
 
 export function setIgnoreHashChange(value) {
