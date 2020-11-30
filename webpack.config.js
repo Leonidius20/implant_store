@@ -40,7 +40,7 @@ const config = {
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: "src/assets/index.html",
-
+            meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'},
         }),
     ],
 };
