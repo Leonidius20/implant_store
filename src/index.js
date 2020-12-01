@@ -80,6 +80,7 @@ function navigate() {
             break;
     }
     scroll(0, 0);
+    document.getElementById('navbarColor02').classList.remove('show');
 }
 
 export function setIgnoreHashChange(value) {
