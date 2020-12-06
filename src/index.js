@@ -9,7 +9,7 @@ import categoryController from "./categorypage/categoryController";
 import cartController from "./cartpage/cartController";
 import makeOrderController from "./makeorder/makeOrderController";
 
-export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_db/';
+export const API_URL = 'https://my-json-server.typicode.com/Leonidius20/implant_store/';
 
 let ignoreHashChange = false;
 
